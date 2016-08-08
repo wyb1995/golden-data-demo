@@ -6,14 +6,20 @@ const App = React.createClass({
     },
     removeElement: function (index) {
         const elements = this.state.elements;
-        elements.splice(index,1);
+        elements.splice(index, 1);
+        this.setState({elements});
+    },
+    addElement: function (element) {
+        const elements = this.state.elements;
+        elements.push(element);
         this.setState({elements});
     },
     render: function () {
         return <div>
             {this.props.children && React.cloneElement(this.props.children, {
                 elements: this.state.elements,
-                onRemove: this.removeElement
+                onRemove: this.removeElement,
+                onAdd: this.addElement
             })}
         </div>
     }
@@ -24,7 +30,7 @@ const Editor = React.createClass({
         return <div>
             <ReactRouter.Link to="/previewer">previewer</ReactRouter.Link>
             <LeftPanel elements={this.props.elements} onRemove={this.props.onRemove}/>
-            <RightPanel />
+            <RightPanel onAdd={this.props.onAdd}/>
         </div>
     }
 });
@@ -45,8 +51,18 @@ const LeftPanel = React.createClass({
 });
 
 const RightPanel = React.createClass({
+    add: function () {
+        const element = $("input[name=element]:checked").val();
+        this.props.onAdd(element);
+    },
     render: function () {
-        return <div>rightPanel</div>
+        return <div>
+            <div>
+                <input type="radio" name="element" value="text"/>Text
+                <input type="radio" name="element" value="date"/>Date
+            </div>
+            <button onClick={this.add}>+</button>
+        </div>
     }
 });
 
