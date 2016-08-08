@@ -1,0 +1,22 @@
+{
+  "name": "golden-data-demo",
+  "authors": [
+    "wyb1995 <wy_b1995@163.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "^15.3.0",
+    "babel": "^5.8.38",
+    "jQuery": "^3.1.0"
+  }
+}
